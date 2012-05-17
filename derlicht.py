@@ -19,7 +19,7 @@ class MainWindow(wx.Frame):
 		
 		self.sliders = []
 		for i in range(128):
-			s = wx.Slider(self.scroll,-1, maxValue=255,style=wx.SL_VERTICAL)
+			s = wx.Slider(self.scroll,-1, maxValue=255,style=wx.SL_VERTICAL|wx.SL_INVERSE)
 			self.sliders.append(s)
 			self.sliders_sizer.Add(s, 1, wx.EXPAND)
 		
