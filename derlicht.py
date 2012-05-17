@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import wx
+import sys
 class MainWindow(wx.Frame):
 	"""Main Window for the application. """
 	def __init__(self, parent, title):
@@ -10,38 +11,32 @@ class MainWindow(wx.Frame):
 	def create_components(self):
 		#self.scenes_panel = wx.Panel(self,-1, style=wx.SUNKEN_BORDER)
 		
-		
 		self.scroll = wx.ScrolledWindow( self, -1 )
-		self.slider_panel = wx.Panel( self.scroll, -1 )
+		self.panel = wx.Panel( self, -1 )
 		self.sizer_slider = wx.BoxSizer(wx.HORIZONTAL)
 		
-		sizer_main = wx.BoxSizer(wx.VERTICAL)
+		self.sizer_main = wx.BoxSizer(wx.VERTICAL)
 		self.sizer_sliders = wx.BoxSizer(wx.HORIZONTAL)
 		
 		self.sliders = []
 		for i in range(128):
-			s = wx.Slider(self.slider_panel,-1, maxValue=255,style=wx.SL_VERTICAL)
+			s = wx.Slider(self.panel,-1, maxValue=255,style=wx.SL_VERTICAL)
 			self.sliders.append(s)
 			self.sizer_sliders.Add(s, 1, wx.EXPAND)
 		
-		self.panel_sizer = wx.BoxSizer( wx.VERTICAL )
-		self.panel_sizer.Add(self.sizer_sliders, proportion=1, flag=wx.ALL)
+		self.sizer_main.Add(self.sizer_sliders, proportion=1, flag=wx.ALL)
 		
-		self.slider_panel.SetSizer(self.panel_sizer)
-		self.slider_panel.SetAutoLayout( True )
-		self.slider_panel.Layout()
-		self.slider_panel.Fit()
+		self.panel.SetSizer(self.sizer_main)
+		self.panel.SetAutoLayout( True )
+		self.panel.Layout()
+		self.panel.Fit()
 		
-		#sizer_main.Add(self.scenes_panel, 1, wx.EXPAND)
-		sizer_main.Add(self.slider_panel, 1, wx.EXPAND)
-		
-		
-		
-		
-			
-		self.SetSizer(sizer_main)
+		self.SetSizer(self.sizer_main)
 		self.SetAutoLayout(1)
-		#sizer_main.Fit(self)
+		
+		self.Bind(wx.EVT_CLOSE, self.OnQuit)
+	def OnQuit(self, *args):
+		sys.exit()
 		
 app = wx.App(False)
 frame = MainWindow(None, 'Der Licht Virtual Controller')
