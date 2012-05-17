@@ -17,8 +17,6 @@ class DMXDevice(object):
 	
 	values = [] # Initial values, same order as attributes
 	
-	start_channel = 0 # don't override this
-	
 	def __init__(self, start_channel):
 		self.start_channel = start_channel
 		pass # override this
@@ -96,5 +94,6 @@ if __name__ == "__main__":
 	m.add_device(dev1)
 	m.add_device(dev2)
 	s1 = Scene(m)
+	s1.values[0] = [91,90,128]
 	s1.values[1] = [90,90,128]
 	print m.generate_dmx_values(s1)
