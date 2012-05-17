@@ -13,7 +13,6 @@ class MainWindow(wx.Frame):
 		
 		self.scroll = wx.ScrolledWindow( self, -1 )
 		self.panel = wx.Panel( self, -1 )
-		self.sizer_slider = wx.BoxSizer(wx.HORIZONTAL)
 		
 		self.sizer_main = wx.BoxSizer(wx.VERTICAL)
 		self.sizer_sliders = wx.BoxSizer(wx.HORIZONTAL)
@@ -24,7 +23,7 @@ class MainWindow(wx.Frame):
 			self.sliders.append(s)
 			self.sizer_sliders.Add(s, 1, wx.EXPAND)
 		
-		self.sizer_main.Add(self.sizer_sliders, proportion=1, flag=wx.ALL)
+		self.sizer_main.Add(self.sizer_sliders, proportion=1, flag=wx.ALL|wx.EXPAND)
 		
 		self.panel.SetSizer(self.sizer_main)
 		self.panel.SetAutoLayout( True )
